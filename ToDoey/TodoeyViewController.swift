@@ -13,9 +13,22 @@ class TodoeyViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        /*
+         this method didn't work :-
+        if let items = UserDefaults.standard.array(forKey: "itemArray") as? [String] {
+            itemArray = items
+        }
+        */
+        
+        if let items = defaults.array(forKey: "TodoListArray") as? [String] {
+            itemArray = items
+        }
+        
     }
     
     var itemArray = ["Item one", "Samsung M40", "RedMi note 7S"]
+    
+    let defaults = UserDefaults.standard
     
     
     //MARK - Table View Data Source Methods
@@ -56,6 +69,8 @@ class TodoeyViewController: UITableViewController {
             (action) in
             print(textField.text!)
             self.itemArray.append(textField.text!)
+            self.defaults.set(self.itemArray, forKey: "TodoListArray")
+            
             self.tableView.reloadData()
         }
         alert.addTextField { (alertTextField) in
