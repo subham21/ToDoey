@@ -15,7 +15,8 @@ class TodoeyViewController: UITableViewController {
         // Do any additional setup after loading the view.
     }
     
-    let itemArray = ["Item one", "Samsung M40", "RedMi note 7S"]
+    var itemArray = ["Item one", "Samsung M40", "RedMi note 7S"]
+    
     
     //MARK - Table View Data Source Methods
     
@@ -44,7 +45,28 @@ class TodoeyViewController: UITableViewController {
         }
     }
     
-    //MARK -
+    //MARK - Add New Items
+    
+    @IBAction func UIBarButton(_ sender: UIBarButtonItem) {
+        
+        var textField = UITextField()
+        
+        let alert = UIAlertController(title: "Add todo items", message: "", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Add item", style: .default) {
+            (action) in
+            print(textField.text!)
+            self.itemArray.append(textField.text!)
+            self.tableView.reloadData()
+        }
+        alert.addTextField { (alertTextField) in
+            alertTextField.placeholder = "Create new item"
+            textField = alertTextField
+        }
+        alert.addAction(action)
+        
+        present(alert, animated: true, completion: nil)
+        
+    }
     
     //MARK -
     
